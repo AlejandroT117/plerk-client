@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect, useState} from 'react';
+import { AppProvider } from './context/MainContext';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import './styles/main.scss';
+import { NavBar } from './components/NavBar/NavBar';
+import { Container } from './components/Container/Container';
+import {Dashboard} from './pages/Dashboard'
+import {EnterpriseAnalysis} from './pages/EnterpriseAnalysis'
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider>
+      <BrowserRouter>
+        <NavBar/>
+        <Container>
+          <Routes>
+            <Route path='/' element={<Dashboard/>}/>
+            <Route path='/enterpriseAnalysis' element={<EnterpriseAnalysis/>}/>
+            <Route path="/*" element={<Navigate to="/" />} />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+    </AppProvider>
   );
 }
 
