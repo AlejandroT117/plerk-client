@@ -8,6 +8,7 @@ import {
   getTotalTransPaidOfEnterprise,
   gateDatesTransOFEnterprise,
 } from "../helpers/enterprises";
+import { useGet } from "../hooks/useGet";
 
 export const EnterpriseAnalysis = () => {
   const [enterpriseId, setEnterpriseId] = useState("");
