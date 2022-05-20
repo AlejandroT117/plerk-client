@@ -24,7 +24,7 @@ export const getEnterpriseMostSales = async () => {
 export const getEnterpriseLessSales = async () => {
   try {
     const enterprise = await axios.get(
-      "http://localhost:8080/api/transactions/sales/n?status_trans=closed&limit=1&order=1"
+      "/api/transactions/sales/n?status_trans=closed&limit=1&order=1"
     );
 
     return enterprise.data;
