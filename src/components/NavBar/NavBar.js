@@ -35,10 +35,10 @@ export const NavBar = () => {
       >
         <ul>
           <li>
-            <Link to="/">Dashboard</Link>
+            <Link to="/" onClick={expand}>Dashboard</Link>
           </li>
           <li>
-            <Link to="/enterpriseAnalysis">Companies Analysis</Link>
+            <Link to="/enterpriseAnalysis" onClick={expand}>Companies Analysis</Link>
           </li>
         </ul>
       </div>
