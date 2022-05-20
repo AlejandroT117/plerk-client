@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/MainContext";
 import {
+  getTotalClosedTransByEnterprise,
   getTotalPricePaidTransactions,
   getTotalTransactionsByStatus,
 } from "../../helpers/enterprises";
@@ -10,14 +11,17 @@ export const MainBox = () => {
   const { enterprises } = useContext(AppContext);
   const [totalPaidTrans, setTotalPaidTrans] = useState(0);
   const [totalTrans, setTotalTrans] = useState(null);
+  const [totalClosedTrans, setTotalClosedTrans] = useState(null)
 
   useEffect(() => {
     async function fetchData() {
       const paid = await getTotalPricePaidTransactions();
       const totalTrans = await getTotalTransactionsByStatus();
+      const totalClosedTrans = await getTotalClosedTransByEnterprise()
 
       setTotalPaidTrans(paid.total);
       setTotalTrans(totalTrans);
+      setTotalClosedTrans(totalClosedTrans)
     }
 
     fetchData();
@@ -41,6 +45,15 @@ export const MainBox = () => {
         title_col2={"Precio Total"}
         data_array={totalTrans}
         counter_name={"totalEarnings"}
+        symbol_counter={"$"}
+      />
+      <TableCount
+        className={'bigTable'}
+        titleTable={"Precio total de transacciones cerradas por empresa"}
+        title_col1={"Empresa"}
+        title_col2={"Precio Total"}
+        data_array={totalClosedTrans}
+        counter_name={"total"}
         symbol_counter={"$"}
       />
     </div>

@@ -92,3 +92,75 @@ export const getReverseSalesByEnterprise = async()=>{
     return e;
   }
 }
+
+export const getTotalClosedTransByEnterprise = async()=>{
+  try {
+    const total = await axios.get(
+      "/api/transactions/sales/enterprise"
+    );
+
+    return total.data;
+  } catch (e) {
+    return e;
+  }
+}
+
+export const getNameOfEnterpriseById= async(id)=>{
+  try {
+    const enterprise = await axios.get(
+      `/api/enterprises/${id}`
+    );
+
+    return enterprise.data;
+  } catch (e) {
+    return e;
+  }
+}
+
+export const getTotalTransPaidOfEnterprise= async(id)=>{
+  try {
+    const total = await axios.get(
+      `/api/enterprises/transactions/${id}?final_payment=true`
+    );
+
+    return total.data;
+  } catch (e) {
+    return e;
+  }
+}
+
+export const getTotalTransNonPaidOfEnterprice= async(id)=>{
+  try {
+    const total = await axios.get(
+      `/api/enterprises/transactions/${id}?final_payment=false`
+    );
+
+    return total.data;
+  } catch (e) {
+    return e;
+  }
+}
+
+export const getDateMostTransOFEnterprise = async(id)=>{
+  try {
+    const date = await axios.get(
+      `/api/enterprises/transactions/dates/${id}?only_one=true`
+    );
+
+    return date.data;
+  } catch (e) {
+    return e;
+  }
+}
+
+export const gateDatesTransOFEnterprise=async(id)=>{
+  try {
+    const date = await axios.get(
+      `/api/enterprises/transactions/dates/${id}`
+    );
+
+    return date.data;
+  } catch (e) {
+    return e;
+  }
+}

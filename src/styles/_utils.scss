@@ -39,9 +39,15 @@
   margin: auto;
   cursor: pointer;
   transition: all 0.2s linear;
-  &:hover{
+  &:hover :not(:disabled){
     background-color: $secondary-color;
     color: $primary-color;
+  }
+  &:disabled{
+    background-color: rgba(34, 34, 34, 0.3);
+    &:hover{
+      cursor:unset;
+    }
   }
 }
 
@@ -75,3 +81,25 @@
   }
 }
 
+
+.loader {
+  border: 8px solid $primary-color;
+  border-top: 10px solid $secondary-color;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  padding: 5px;
+  animation: spin 1s linear infinite;
+  position: relative;
+  margin: auto;
+  top: calc(50% / 2);
+  box-shadow: $box-shadow;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
