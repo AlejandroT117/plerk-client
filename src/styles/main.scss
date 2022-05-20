@@ -31,7 +31,7 @@
     width: 25%;
     .card {
       border: 2px $primary-color solid;
-      padding: 1rem 2em;
+      padding: 1rem 1.2em;
       box-shadow: $box-shadow-soft;
       
       li{
@@ -51,6 +51,8 @@
       }
       .card-body{
         font-size: size(1.8);
+        max-height: 400px;
+        overflow: auto;
 
         .data-group{
           text-align: center;
@@ -61,18 +63,43 @@
           }
         }
 
-        table{
-          text-align: center;
-          width: 100%;
-        }
       }
     }
   }
 }
+/* tables */
+.title-table{
+  text-align: center;
+}
+
+table{
+  text-align: center;
+  width: 100%;
+}
+
+.bigTable{
+  thead{
+    line-height: 3rem;
+  }
+  th{
+    border-bottom: 2px solid #222;
+  }
+  tbody tr{
+    line-height: 2.5rem;
+  }
+}
+
+.smallTable{
+  th{
+    border-bottom: 1px solid #222;
+  }
+  tbody td{
+    border-bottom: 0.5px solid rgba(34, 34, 34, 0.3);
+  }
+}
+
+
 /* Nav Bar */
-
-
-
 .navigation {
   height: 60px;
   width: 100%;

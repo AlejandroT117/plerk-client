@@ -68,3 +68,27 @@ export const getMostReversedEnterprise = async () => {
     return e;
   }
 };
+
+export const getTotalTransactionsByStatus = async()=>{
+  try {
+    const enterprise = await axios.get(
+      "/api/transactions/sales/earnings?final_payment=false"
+    );
+
+    return enterprise.data;
+  } catch (e) {
+    return e;
+  }
+}
+
+export const getReverseSalesByEnterprise = async()=>{
+  try {
+    const enterprises = await axios.get(
+      "/api/transactions/sales/enterprise/status"
+    );
+
+    return enterprises.data;
+  } catch (e) {
+    return e;
+  }
+}

@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { getEnterpriseLessSales, getEnterpriseMostSales, getMostReversedEnterprise, getTotalPriceNonPaidTransactions } from "../../helpers/enterprises";
+import {
+  getEnterpriseLessSales,
+  getEnterpriseMostSales,
+  getMostReversedEnterprise,
+  getReverseSalesByEnterprise,
+  getTotalPriceNonPaidTransactions,
+} from "../../helpers/enterprises";
 import { Card } from "../Card/Card";
 import { TableCount } from "../TableCount/TableCount";
 
@@ -19,7 +25,10 @@ const CardOneBody = ({ mostSales, lessSales, nonPaid, mostReversed }) => {
         <h4>${nonPaid}</h4>
       </div>
       <div className="data-group">
-        <p>Empresa con más rechazos de ventas ({mostReversed && mostReversed.count})</p>
+        <p>
+          Empresa con más rechazos de ventas (
+          {mostReversed && mostReversed.count})
+        </p>
         <h4>{mostReversed && mostReversed._id}</h4>
       </div>
     </>
@@ -31,32 +40,48 @@ export const Sidebar = () => {
   const [lessSates, setLessSates] = useState(null);
   const [nonPaid, setNonPaid] = useState(0);
   const [mostReversed, setMostReversed] = useState(null);
+  const [reversedEnter, setReversedEnter] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
-      let mostSales = await getEnterpriseMostSales()
-      let lessSales = await getEnterpriseLessSales()
-      let nonPaid = await getTotalPriceNonPaidTransactions()
-      console.log(nonPaid)
-      let mostReversed = await getMostReversedEnterprise()
-      setMostSales(mostSales[0])
-      setLessSates(lessSales[0])
-      setNonPaid(nonPaid.total)
-      setMostReversed(mostReversed)
+      let mostSales = await getEnterpriseMostSales();
+      let lessSales = await getEnterpriseLessSales();
+      let nonPaid = await getTotalPriceNonPaidTransactions();
+      let mostReversed = await getMostReversedEnterprise();
+      let reversedEnter = await getReverseSalesByEnterprise();
+      setMostSales(mostSales[0]);
+      setLessSates(lessSales[0]);
+      setNonPaid(nonPaid.total);
+      setMostReversed(mostReversed);
+      setReversedEnter(reversedEnter);
     }
-    fetchData()
-  }, [mostSales, lessSates, nonPaid, mostReversed])
-  
+    fetchData();
+  }, [mostSales, lessSates, nonPaid, mostReversed]);
 
   return (
     <div className="sidebar">
       <Card
         cardTitle={"Destacados"}
-        cardBody={<CardOneBody mostSales={mostSales} lessSales={lessSates} nonPaid={nonPaid} mostReversed={mostReversed}/>}
+        cardBody={
+          <CardOneBody
+            mostSales={mostSales}
+            lessSales={lessSates}
+            nonPaid={nonPaid}
+            mostReversed={mostReversed}
+          />
+        }
       />
       <Card
         cardTitle={"Rechazos de ventas por empresa"}
-        cardBody={<TableCount />}
+        cardBody={
+          <TableCount
+            className={'smallTable'}
+            title_col1={"Empresa"}
+            title_col2={"Frecuencia"}
+            data_array={reversedEnter}
+            counter_name={"count"}
+          />
+        }
       />
     </div>
   );
