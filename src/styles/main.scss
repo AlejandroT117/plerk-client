@@ -5,17 +5,73 @@
 .container {
   display: flex;
   max-width: 1280px;
-  flex-direction: column;
+  flex-direction: row;
   margin: auto;
   border-radius: 10px;
-  background-color: $primary-color;
+  background-color: #eee;
   box-shadow: $box-shadow;
   position: relative;
   top: 70px;
   overflow: hidden;
   transition: all 0.2s ease-in-out;
+  .main {
+    width: 74%;
+    height: auto;
+    padding: 1rem 1.5rem;
+    font-size: size(2.5);
+    .main-header{
+      width: 100%;
+      background-color: $terciary-color;
+      padding: 0.5rem 1.5rem;
+      color: $font-color;
+      border-radius: 3px;
+    }
+  }
+  .sidebar {
+    width: 25%;
+    .card {
+      border: 2px $primary-color solid;
+      padding: 1rem 2em;
+      box-shadow: $box-shadow-soft;
+      
+      li{
+        list-style-type: none;
+        font-size: size(1.8);
+      }
+
+      .card-title{
+        text-align: center;
+        width: 100%;
+        background-color: $secondary-color;
+        color: $font-color;
+        border-radius: 3px;
+        h4{
+          font-weight: 400;
+        }
+      }
+      .card-body{
+        font-size: size(1.8);
+
+        .data-group{
+          text-align: center;
+          margin: 0.5rem 0;
+
+          h4{
+            font-size: size(2);
+          }
+        }
+
+        table{
+          text-align: center;
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 /* Nav Bar */
+
+
 
 .navigation {
   height: 60px;
@@ -30,7 +86,7 @@
   color: $secondary-color;
   box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.4);
   z-index: 999;
-  .name-brand{
+  .name-brand {
     margin: 0 1rem;
     color: $font-color;
     font-weight: 200;
@@ -46,9 +102,9 @@
     li {
       list-style-type: none;
       padding: 0 1rem;
-        display: flex;
-        align-items: center;
-        height: 60px;
+      display: flex;
+      align-items: center;
+      height: 60px;
       a {
         text-decoration: none;
         display: block;
@@ -72,7 +128,6 @@
   background-color: $terciary-color;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
-  // positions the icon to the right and center aligns it vertically
   position: absolute;
   top: 50%;
   right: 25px;
@@ -82,6 +137,7 @@
     background-color: $fifth-color;
   }
 }
+
 
 @media screen and (max-width: 768px) {
   .hamburger {
@@ -124,6 +180,15 @@
       &.expanded {
         left: 0%;
       }
+    }
+  }
+  .container{
+    flex-wrap: wrap;
+    .main {
+      width: 100%;
+    }
+    .sidebar {
+      width: 100%;
     }
   }
 }

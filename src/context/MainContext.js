@@ -12,7 +12,7 @@ export const AppProvider = ({children})=>{
       setEnterprises(companies)
     }
     fetchData()
-  })
+  }, [])
 
   return (
     <AppContext.Provider value={{enterprises}}>
