@@ -6,6 +6,7 @@ import {
   getReverseSalesByEnterprise,
   getTotalPriceNonPaidTransactions,
 } from "../../helpers/enterprises";
+import { useGet } from "../../hooks/useGet";
 import { Card } from "../Card/Card";
 import { TableCount } from "../TableCount/TableCount";
 
@@ -36,27 +37,11 @@ const CardOneBody = ({ mostSales, lessSales, nonPaid, mostReversed }) => {
 };
 
 export const Sidebar = () => {
-  const [mostSales, setMostSales] = useState(null);
-  const [lessSates, setLessSates] = useState(null);
-  const [nonPaid, setNonPaid] = useState(0);
-  const [mostReversed, setMostReversed] = useState(null);
-  const [reversedEnter, setReversedEnter] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      let mostSales = await getEnterpriseMostSales();
-      let lessSales = await getEnterpriseLessSales();
-      let nonPaid = await getTotalPriceNonPaidTransactions();
-      let mostReversed = await getMostReversedEnterprise();
-      let reversedEnter = await getReverseSalesByEnterprise();
-      setMostSales(mostSales[0]);
-      setLessSates(lessSales[0]);
-      setNonPaid(nonPaid.total);
-      setMostReversed(mostReversed);
-      setReversedEnter(reversedEnter);
-    }
-    fetchData();
-  }, [mostSales, lessSates, nonPaid, mostReversed]);
+  let mostSales = useGet(getEnterpriseMostSales)
+  let lessSales = useGet(getEnterpriseLessSales)
+  let nonPaid = useGet(getTotalPriceNonPaidTransactions)
+  let mostReversed = useGet(getMostReversedEnterprise)
+  let reversedEnter= useGet(getReverseSalesByEnterprise)
 
   return (
     <div className="sidebar">
@@ -64,9 +49,9 @@ export const Sidebar = () => {
         cardTitle={"Destacados"}
         cardBody={
           <CardOneBody
-            mostSales={mostSales}
-            lessSales={lessSates}
-            nonPaid={nonPaid}
+            mostSales={mostSales && mostSales[0]}
+            lessSales={lessSales && lessSales[0]}
+            nonPaid={nonPaid && nonPaid.total}
             mostReversed={mostReversed}
           />
         }
